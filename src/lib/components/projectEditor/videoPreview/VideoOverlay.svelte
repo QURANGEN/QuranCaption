@@ -68,7 +68,7 @@ const fadeDuration = $derived(() => {
 
 	let currentSubtitleTranslations = $derived(() => {
 		const subtitle = currentSubtitle();
-		if (!subtitle) return [];
+		if (!subtitle || !(subtitle instanceof SubtitleClip || subtitle instanceof PredefinedSubtitleClip)) return {};
 		return subtitle.translations;
 	});
 
@@ -244,6 +244,8 @@ const fadeDuration = $derived(() => {
 	 */
 	$effect(() => {
 		(async () => {
+			const subtitlesContainer = document.getElementById('subtitles-container');
+
 			if (!currentSubtitle()) {
 				if (subtitlesContainer) {
 					subtitlesContainer.style.opacity = '1';
@@ -265,7 +267,6 @@ const fadeDuration = $derived(() => {
 
 			// Cache tout les sous-titres pendant le recalcul pour éviter les sauts visuels
 			// sélectionne l'élément d'id subtitles-container
-			const subtitlesContainer = document.getElementById('subtitles-container');
 			if (subtitlesContainer) {
 				subtitlesContainer.style.opacity = '0';
 			}
