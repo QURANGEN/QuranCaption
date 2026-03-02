@@ -5,7 +5,6 @@ import { ProjectEditorTabs, TrackType } from './enums';
 import { SerializableBase } from './misc/SerializableBase';
 import { Utilities } from './misc/Utilities';
 import { CustomTextTrack } from './Track.svelte';
-import type { a } from 'vitest/dist/chunks/suite.d.FvehnV49.js';
 import QPCFontProvider from '$lib/services/FontProvider';
 import { open } from '@tauri-apps/plugin-dialog';
 import { readFile, readTextFile } from '@tauri-apps/plugin-fs';
