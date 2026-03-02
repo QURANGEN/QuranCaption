@@ -194,7 +194,9 @@ function exportProgress(event: any): void {
 		}
 	}
 
-	ExportService.saveExports();
+	ExportService.saveExports().catch((err) => {
+		console.error('Failed to save export progress:', err);
+	});
 }
 
 export interface ExportProgress {

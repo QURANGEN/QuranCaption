@@ -173,47 +173,6 @@ export class VerseTranslation extends Translation {
 				// Texte identique après normalisation: ne rien faire
 				return;
 			}
-
-			if (originalTranslationText) {
-				if (!originalTranslationText.includes(this.text)) {
-					return; // La traduction a été bruteforcée, on ne fait rien
-				}
-
-				const originalWords = originalTranslationText.split(' ');
-				const currentWords = this.text.split(' ');
-
-				// Si le texte de la traduction n'a pas changé, on ne fait rien
-				if (originalWords.length === currentWords.length) {
-					return;
-				}
-
-				// Trouve maintenant l'index du premier mot de la traduction dans le texte original de telle sorte que tous les mots de la traduction soient présents dans le texte original
-				let startIndex = -1;
-				for (let i = 0; i < originalWords.length; i++) {
-					if (originalWords[i] === currentWords[0]) {
-						// Potentiel début trouvé, vérifie que tous les mots suivants sont présents
-						let allMatch = true;
-						for (let j = 1; j < currentWords.length; j++) {
-							if (originalWords[i + j] !== currentWords[j]) {
-								allMatch = false;
-								break;
-							}
-						}
-						if (allMatch) {
-							startIndex = i;
-							break;
-						}
-					}
-				}
-				if (startIndex !== -1) {
-					this.startWordIndex = startIndex;
-					this.endWordIndex = startIndex + currentWords.length - 1;
-					this.isBruteForce = false;
-				} else {
-					// La traduction a été bruteforcée, on ne fait rien
-					this.isBruteForce = true;
-				}
-			}
 		}
 	}
 }
